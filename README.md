@@ -10,7 +10,7 @@ To run this application, you will need Node.js installed on your system. You can
 
 ## Important
 
-Make sure you have a `data.json` file whose contents are `[]` when starting the server.
+Make sure you have a `data.json` file in the root of the project whose contents are `[]` when starting the server.
 
 ## Installation
 
