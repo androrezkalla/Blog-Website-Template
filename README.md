@@ -8,6 +8,10 @@ This is NOT meant for production!
 
 To run this application, you will need Node.js installed on your system. You can download the latest version of Node.js from the official website: https://nodejs.org/
 
+## Important
+
+Make sure you have a `data.json` file whose contents are `[]` when starting the server.
+
 ## Installation
 
 Clone the repository to your local machine
