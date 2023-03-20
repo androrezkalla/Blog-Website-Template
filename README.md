@@ -32,11 +32,11 @@ This will start the server on port 3001 by default. You can access the API using
 
 The following endpoints are available:
 
-GET /v1/api/posts - Retrieve a list of all blog posts. 
-POST /v1/api/posts - Create a new blog post. 
-GET /v1/api/posts/:id - Retrieve a specific blog post by ID. 
-PATCH /v1/api/posts/:id - Update a specific blog post by ID. 
-DELETE /v1/api/posts/:id - Delete a specific blog post by ID. 
+- GET /v1/api/posts - Retrieve a list of all blog posts. 
+- POST /v1/api/posts - Create a new blog post. 
+- GET /v1/api/posts/:id - Retrieve a specific blog post by ID. 
+- PATCH /v1/api/posts/:id - Update a specific blog post by ID. 
+- DELETE /v1/api/posts/:id - Delete a specific blog post by ID. 
 
 ## Error Handling
 
