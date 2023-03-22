@@ -93,7 +93,7 @@ app.get('/v1/api/posts/:id', (req, res) => {
     }
 
     const posts = JSON.parse(data);
-    const post = posts.find((p) => p.id === id);
+    const post = posts.find((p) => parseInt(p.id, 10) === parseInt(id, 10));
 
     if (!post) {
       res.status(404).json({
