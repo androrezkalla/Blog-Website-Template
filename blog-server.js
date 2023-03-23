@@ -1,12 +1,16 @@
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const multer = require('multer');
 
 const app = express();
 const port = 3001;
+const upload = multer();
 
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 function sendError(res, statusCode, message) {
   res.status(statusCode).json({
@@ -41,7 +45,7 @@ app.get('/v1/api/posts', (req, res) => {
   });
 });
 
-app.post('/v1/api/posts', (req, res) => {
+app.post('/v1/api/posts', upload.none(), (req, res) => {
   const { title, content } = req.body;
   if (!title || !content) {
     res.status(400).json({
@@ -59,8 +63,17 @@ app.post('/v1/api/posts', (req, res) => {
     }
 
     const posts = JSON.parse(data);
+
+    const newId =
+      posts.reduce((accumulator, currentValue) => {
+        if (accumulator > currentValue.id) {
+          return accumulator;
+        }
+        return currentValue.id;
+      }, 0) + 1;
+
     const newPost = {
-      id: posts.length + 1,
+      id: newId,
       title,
       content,
       last_updated: new Date().toISOString(),
@@ -106,7 +119,7 @@ app.get('/v1/api/posts/:id', (req, res) => {
   });
 });
 
-app.patch('/v1/api/posts/:id', (req, res) => {
+app.patch('/v1/api/posts/:id', upload.none(), (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
 
@@ -167,7 +180,7 @@ app.delete('/v1/api/posts/:id', (req, res) => {
       return;
     }
 
-    let posts = JSON.parse(data);
+    const posts = JSON.parse(data);
     const postIndex = posts.findIndex(
       (p) => parseInt(p.id, 10) === parseInt(id, 10)
     );
@@ -189,7 +202,7 @@ app.delete('/v1/api/posts/:id', (req, res) => {
         return;
       }
 
-      res.sendStatus(204);
+      res.sendStatus(200);
     });
   });
 });
