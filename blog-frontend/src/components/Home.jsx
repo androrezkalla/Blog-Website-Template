@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Button, Center, Spinner } from '@chakra-ui/react';
 import BlogPost from '../components/BlogPost';
 import useGlobalReducer from '../utils/useGlobalReducer';
 
@@ -19,9 +18,9 @@ function Home() {
 
   if (isLoading) {
     return (
-      <Center className="bg-black" height="100vh">
-        <Spinner size="xl" color="white" />
-      </Center>
+      <div className="bg-black" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="spinner" style={{ width: '50px', height: '50px', border: '4px solid white', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+      </div>
     );
   }
 
@@ -31,8 +30,8 @@ function Home() {
       <div className="blog-post-container">
       {state.allPosts.map((post) => {
         return (
-          <Link to={`/blog/${post.id}`}>
-            <BlogPost post={post} />;
+          <Link to={`/blog/${post.id}`} key={post.id}>
+            <BlogPost post={post} />
           </Link>
         );
       })}
@@ -45,4 +44,3 @@ function Home() {
 }
 
 export default Home;
-
