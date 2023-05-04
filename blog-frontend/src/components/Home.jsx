@@ -7,7 +7,7 @@ import useGlobalReducer from '../utils/useGlobalReducer';
 function Home() {
   const { state, getAllBlogPosts } = useGlobalReducer();
   const [isLoading, setIsLoading] = useState(true);
-  const location = useLocation(); // This is used to force a re-render when the user clicks the back button
+  const location = useLocation(); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,7 +15,6 @@ function Home() {
       setIsLoading(false);
     };
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.key]);
 
   if (isLoading) {
@@ -25,7 +24,6 @@ function Home() {
       </Center>
     );
   }
-
 
   return (
     <div className="home-container">
